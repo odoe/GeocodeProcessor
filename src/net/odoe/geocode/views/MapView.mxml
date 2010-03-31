@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml"
+		   xmlns:esri="http://www.esri.com/2008/ags">
+	<mx:Script>
+		<![CDATA[
+			import com.esri.ags.geometry.MapPoint;
+			import com.esri.ags.Graphic;
+			import mx.collections.ArrayCollection;
+
+			[Geocode]
+			[Bindable]
+			public var addresses:ArrayCollection;
+
+			protected function recenterMap():void
+			{
+				for each (var gr:Graphic in myGraphicsLayer.graphicProvider)
+				{
+					map.centerAt(gr.geometry as MapPoint);
+				}
+			}
+		]]>
+	</mx:Script>
+
+	<esri:Map id="map">
+		<esri:extent>
+			<esri:Extent xmin="-117.2"
+						 ymin="34.0"
+						 xmax="-117.0"
+						 ymax="34.09">
+				<esri:SpatialReference wkid="4326"/>
+			</esri:Extent>
+		</esri:extent>
+		<esri:ArcGISTiledMapServiceLayer url="http://server.arcgisonline.com/ArcGIS/rest/services/ESRI_StreetMap_World_2D/MapServer"/>
+		<esri:GraphicsLayer id="myGraphicsLayer"
+							graphicProvider="{addresses}"/>
+	</esri:Map>
+	<mx:Button top="5"
+			   horizontalCenter="0"
+			   click="recenterMap()"
+			   label="Center Map"/>
+</mx:Canvas>

@@ -1,0 +1,10 @@
+/.settings/*
+ 
+/html-template/*
+/bin-debug/*
+/launch/*
+ 
+.actionScriptProperties
+.flexProperties
+.project
+.as3_classpath

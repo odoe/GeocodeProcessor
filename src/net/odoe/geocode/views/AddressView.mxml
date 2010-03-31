@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Panel xmlns:mx="http://www.adobe.com/2006/mxml"
+		  layout="vertical"
+		  title="Find an Address">
+	<mx:Script>
+		<![CDATA[
+			import net.odoe.geocode.events.GeoEvent;
+			import net.odoe.geocode.models.vo.Address;
+
+			protected function findClick_handler():void
+			{
+				var addr:Address = new Address();
+				addr.Street = address.text;
+				addr.City = city.text;
+				addr.Zip = zip.text;
+				addr.State = state.text;
+				addr.Country = country.text;
+
+				dispatchEvent(new GeoEvent(GeoEvent.GEOCODE_ADDRESS, addr));
+			}
+
+
+		]]>
+	</mx:Script>
+	<mx:Form>
+		<mx:FormItem label="Street">
+			<mx:TextInput width="100%"
+						  id="address"
+						  text="380 New York St"/>
+		</mx:FormItem>
+		<mx:FormItem label="City">
+			<mx:TextInput width="100%"
+						  id="city"
+						  text="Redlands"/>
+		</mx:FormItem>
+		<mx:FormItem label="Zip Code or postal code">
+			<mx:TextInput width="100"
+						  id="zip"
+						  text="92373"/>
+		</mx:FormItem>
+		<mx:FormItem label="State/Province">
+			<mx:TextInput width="100"
+						  id="state"
+						  text="CA"/>
+		</mx:FormItem>
+		<mx:FormItem label="Country">
+			<mx:ComboBox id="country"
+						 selectedIndex="1">
+				<mx:ArrayCollection>
+					<mx:String>Canada</mx:String>
+					<mx:String>USA</mx:String>
+				</mx:ArrayCollection>
+			</mx:ComboBox>
+		</mx:FormItem>
+		<mx:FormItem>
+			<mx:Button label="Find Address"
+					   click="findClick_handler()"/>
+		</mx:FormItem>
+	</mx:Form>
+	<mx:Text id="myInfo"
+			 width="100%"
+			 color="0x00FF00"
+			 textAlign="center"/>
+</mx:Panel>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Canvas xmlns:mx="http://www.adobe.com/2006/mxml"
+		   xmlns:swiz="http://swiz.swizframework.org"
+		   xmlns:controls="net.odoe.geocode.controls.*"
+		   xmlns:models="net.odoe.geocode.models.*"
+		   xmlns:processors="net.odoe.geocode.processors.*"
+		   xmlns:views="net.odoe.geocode.views.*">
+	<swiz:Swiz id="mySwiz"
+			   dispatcher="{this}">
+		<swiz:config>
+			<swiz:SwizConfig eventPackages="net.odoe.geocode.events"
+							 viewPackages="net.odoe.geocode.views"/>
+		</swiz:config>
+		<swiz:BeanProvider>
+			<controls:AddressControl/>
+
+			<swiz:Bean id="geoModel">
+				<models:GeoModel id="model"/>
+			</swiz:Bean>
+
+		</swiz:BeanProvider>
+		<swiz:customProcessors>
+			<processors:GeocodeProcessor address="{model.address}"/>
+		</swiz:customProcessors>
+	</swiz:Swiz>
+	<views:MapView width="100%" height="100%"/>
+	<views:AddressView right="5" top="5"/>
+</mx:Canvas>
